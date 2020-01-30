@@ -9,10 +9,6 @@ public class Order {
     private String currency;
     private List<OrderItem> items;
 
-    public Order() {
-
-    }
-
     public Order(int id, OrderStatus orderStatus, String currency, List<OrderItem> orderItems) {
         this.id = id;
         this.status = orderStatus;

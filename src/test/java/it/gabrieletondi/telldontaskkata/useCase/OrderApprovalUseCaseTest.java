@@ -5,6 +5,7 @@ import it.gabrieletondi.telldontaskkata.domain.OrderStatus;
 import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import org.junit.Test;
 
+import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -15,9 +16,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test
     public void approvedExistingOrder() {
-        Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatus.CREATED);
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1, OrderStatus.CREATED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
         OrderApprovalRequest request = new OrderApprovalRequest();
@@ -32,9 +31,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test
     public void rejectedExistingOrder() {
-        Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatus.CREATED);
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1, OrderStatus.CREATED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
         OrderApprovalRequest request = new OrderApprovalRequest();
@@ -49,9 +46,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = RejectedOrderCannotBeApprovedException.class)
     public void cannotApproveRejectedOrder() {
-        Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatus.REJECTED);
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1, OrderStatus.REJECTED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
         OrderApprovalRequest request = new OrderApprovalRequest();
@@ -65,9 +60,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = ApprovedOrderCannotBeRejectedException.class)
     public void cannotRejectApprovedOrder() {
-        Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatus.APPROVED);
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1, OrderStatus.APPROVED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
         OrderApprovalRequest request = new OrderApprovalRequest();
@@ -81,9 +74,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
     public void shippedOrdersCannotBeApproved() {
-        Order initialOrder = new Order();
-        initialOrder.setStatus(OrderStatus.SHIPPED);
-        initialOrder.setId(1);
+        Order initialOrder = new Order(1, OrderStatus.SHIPPED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
         OrderApprovalRequest request = new OrderApprovalRequest();
@@ -97,7 +88,7 @@ public class OrderApprovalUseCaseTest {
 
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
     public void shippedOrdersCannotBeRejected() {
-        Order initialOrder = new Order();
+        Order initialOrder = new Order(1, OrderStatus.SHIPPED, "", emptyList());
         initialOrder.setStatus(OrderStatus.SHIPPED);
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
