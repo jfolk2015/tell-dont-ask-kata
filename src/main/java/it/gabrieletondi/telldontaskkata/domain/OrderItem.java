@@ -2,10 +2,11 @@ package it.gabrieletondi.telldontaskkata.domain;
 
 import java.math.BigDecimal;
 
+import static java.math.RoundingMode.HALF_UP;
+
 public class OrderItem {
     private Product product;
     private int quantity;
-    private BigDecimal taxedAmount;
     private BigDecimal tax;
 
     public Product getProduct() {
@@ -25,11 +26,9 @@ public class OrderItem {
     }
 
     public BigDecimal getTaxedAmount() {
-        return taxedAmount;
-    }
-
-    public void setTaxedAmount(BigDecimal taxedAmount) {
-        this.taxedAmount = taxedAmount;
+        return product.getUnitaryTaxedAmount()
+                .multiply(BigDecimal.valueOf(quantity))
+                .setScale(2, HALF_UP);
     }
 
     public BigDecimal getTax() {
