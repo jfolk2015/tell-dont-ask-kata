@@ -37,4 +37,8 @@ public class Product {
     public BigDecimal getUnitaryTax() {
         return price.divide(valueOf(100)).multiply(category.getTaxPercentage()).setScale(2, HALF_UP);
     }
+
+    public BigDecimal getUnitaryTaxedAmount() {
+        return price.add(getUnitaryTax()).setScale(2, HALF_UP);
+    }
 }
