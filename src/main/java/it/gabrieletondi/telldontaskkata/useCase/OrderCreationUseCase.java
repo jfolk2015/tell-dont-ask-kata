@@ -34,9 +34,7 @@ public class OrderCreationUseCase {
                 throw new UnknownProductException();
             }
             else {
-                final OrderItem orderItem = new OrderItem();
-                orderItem.setProduct(product);
-                orderItem.setQuantity(itemRequest.getQuantity());
+                final OrderItem orderItem = new OrderItem(product, itemRequest.getQuantity());
                 order.getItems().add(orderItem);
 
                 order.setTotal(order.getTotal().add(orderItem.getTaxedAmount()));
