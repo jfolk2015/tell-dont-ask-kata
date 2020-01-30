@@ -1,12 +1,11 @@
 package it.gabrieletondi.telldontaskkata.domain;
 
-import it.gabrieletondi.telldontaskkata.useCase.ApprovedOrderCannotBeRejectedException;
-import it.gabrieletondi.telldontaskkata.useCase.OrderApprovalRequest;
-import it.gabrieletondi.telldontaskkata.useCase.RejectedOrderCannotBeApprovedException;
-import it.gabrieletondi.telldontaskkata.useCase.ShippedOrdersCannotBeChangedException;
+import it.gabrieletondi.telldontaskkata.useCase.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.*;
 
 public class Order {
     private final int id;
@@ -57,6 +56,18 @@ public class Order {
         }
 
         this.status = request.isApproved() ? OrderStatus.APPROVED : OrderStatus.REJECTED;
+    }
+
+    public void prepareToShip() {
+        if (status.equals(CREATED) || status.equals(REJECTED)) {
+            throw new OrderCannotBeShippedException();
+        }
+
+        if (status.equals(SHIPPED)) {
+            throw new OrderCannotBeShippedTwiceException();
+        }
+
+        status = SHIPPED;
     }
 
     public OrderStatus getStatus() {
