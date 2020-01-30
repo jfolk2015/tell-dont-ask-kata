@@ -4,10 +4,21 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Order {
+    private int id;
+    private OrderStatus status;
     private String currency;
     private List<OrderItem> items;
-    private OrderStatus status;
-    private int id;
+
+    public Order() {
+
+    }
+
+    public Order(int id, OrderStatus orderStatus, String currency, List<OrderItem> orderItems) {
+        this.id = id;
+        this.status = orderStatus;
+        this.currency = currency;
+        this.items = orderItems;
+    }
 
     public BigDecimal getTotal() {
         return items.stream()
@@ -20,16 +31,8 @@ public class Order {
         return currency;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public List<OrderItem> getItems() {
         return items;
-    }
-
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
     }
 
     public BigDecimal getTax() {
@@ -53,9 +56,5 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void addItem(OrderItem orderItem) {
-        this.items.add(orderItem);
     }
 }
