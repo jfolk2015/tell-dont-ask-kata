@@ -6,7 +6,6 @@ import java.util.List;
 public class Order {
     private String currency;
     private List<OrderItem> items;
-    private BigDecimal tax;
     private OrderStatus status;
     private int id;
 
@@ -34,11 +33,10 @@ public class Order {
     }
 
     public BigDecimal getTax() {
-        return tax;
-    }
-
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
+        return items.stream()
+                .map(OrderItem::getTax)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
     }
 
     public OrderStatus getStatus() {
