@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Order {
-    private int id;
+    private final int id;
     private OrderStatus status;
-    private String currency;
-    private List<OrderItem> items;
+    private final String currency;
+    private final List<OrderItem> items;
 
     public Order(int id, OrderStatus orderStatus, String currency, List<OrderItem> orderItems) {
         this.id = id;

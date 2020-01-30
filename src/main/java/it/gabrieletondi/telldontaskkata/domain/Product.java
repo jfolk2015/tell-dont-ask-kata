@@ -6,9 +6,9 @@ import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_UP;
 
 public class Product {
-    private String name;
-    private BigDecimal price;
-    private BigDecimal taxPercentage;
+    private final String name;
+    private final BigDecimal price;
+    private final BigDecimal taxPercentage;
 
     public Product(String name, BigDecimal price, BigDecimal taxPercentage) {
         this.name = name;
