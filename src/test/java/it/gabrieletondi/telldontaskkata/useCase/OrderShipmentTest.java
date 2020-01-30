@@ -11,20 +11,19 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public class OrderShipmentUseCaseTest {
+public class OrderShipmentTest {
     private final TestOrderRepository orderRepository = new TestOrderRepository();
     private final TestShipmentService shipmentService = new TestShipmentService();
-    private final OrderShipmentUseCase useCase = new OrderShipmentUseCase(orderRepository, shipmentService);
 
     @Test
     public void shipApprovedOrder() {
         Order initialOrder = new Order(1, OrderStatus.APPROVED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentRequest request = new OrderShipmentRequest(orderRepository, shipmentService);
         request.setOrderId(1);
 
-        useCase.run(request);
+        request.process();
 
         assertThat(orderRepository.getSavedOrder().getStatus(), is(OrderStatus.SHIPPED));
         assertThat(shipmentService.getShippedOrder(), is(initialOrder));
@@ -35,10 +34,10 @@ public class OrderShipmentUseCaseTest {
         Order initialOrder = new Order(1, OrderStatus.CREATED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentRequest request = new OrderShipmentRequest(orderRepository, shipmentService);
         request.setOrderId(1);
 
-        useCase.run(request);
+        request.process();
 
         assertThat(orderRepository.getSavedOrder(), is(nullValue()));
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
@@ -49,10 +48,10 @@ public class OrderShipmentUseCaseTest {
         Order initialOrder = new Order(1, OrderStatus.REJECTED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentRequest request = new OrderShipmentRequest(orderRepository, shipmentService);
         request.setOrderId(1);
 
-        useCase.run(request);
+        request.process();
 
         assertThat(orderRepository.getSavedOrder(), is(nullValue()));
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
@@ -63,10 +62,10 @@ public class OrderShipmentUseCaseTest {
         Order initialOrder = new Order(1, OrderStatus.SHIPPED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentRequest request = new OrderShipmentRequest(orderRepository, shipmentService);
         request.setOrderId(1);
 
-        useCase.run(request);
+        request.process();
 
         assertThat(orderRepository.getSavedOrder(), is(nullValue()));
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
