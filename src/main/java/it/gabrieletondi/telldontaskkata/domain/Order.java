@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Order {
-    private BigDecimal total;
     private String currency;
     private List<OrderItem> items;
     private BigDecimal tax;
@@ -12,11 +11,10 @@ public class Order {
     private int id;
 
     public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+        return items.stream()
+                .map(OrderItem::getTaxedAmount)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
     }
 
     public String getCurrency() {
