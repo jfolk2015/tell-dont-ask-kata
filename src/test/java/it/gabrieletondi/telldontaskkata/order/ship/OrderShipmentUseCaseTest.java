@@ -19,9 +19,7 @@ public class OrderShipmentUseCaseTest {
     public void shipApprovedOrder() {
         Order initialOrder = new Order(1, OrderStatus.APPROVED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderShipmentRequest request = new OrderShipmentRequest();
-        request.setOrderId(1);
+        OrderShipmentRequest request = new OrderShipmentRequest(1);
 
         useCase.run(request);
 
@@ -33,9 +31,7 @@ public class OrderShipmentUseCaseTest {
     public void createdOrdersCannotBeShipped() {
         Order initialOrder = new Order(1, OrderStatus.CREATED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderShipmentRequest request = new OrderShipmentRequest();
-        request.setOrderId(1);
+        OrderShipmentRequest request = new OrderShipmentRequest(1);
 
         useCase.run(request);
 
@@ -47,9 +43,7 @@ public class OrderShipmentUseCaseTest {
     public void rejectedOrdersCannotBeShipped() {
         Order initialOrder = new Order(1, OrderStatus.REJECTED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderShipmentRequest request = new OrderShipmentRequest();
-        request.setOrderId(1);
+        OrderShipmentRequest request = new OrderShipmentRequest(1);
 
         useCase.run(request);
 
@@ -61,9 +55,7 @@ public class OrderShipmentUseCaseTest {
     public void shippedOrdersCannotBeShippedAgain() {
         Order initialOrder = new Order(1, OrderStatus.SHIPPED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderShipmentRequest request = new OrderShipmentRequest();
-        request.setOrderId(1);
+        OrderShipmentRequest request = new OrderShipmentRequest(1);
 
         useCase.run(request);
 
