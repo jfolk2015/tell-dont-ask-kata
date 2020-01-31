@@ -30,8 +30,7 @@ public class OrderCreationUseCaseTest {
     public void sellMultipleItems() {
         SellItemRequest saladRequest = new SellItemRequest(2, "salad");
         SellItemRequest tomatoRequest = new SellItemRequest(3, "tomato");
-        final SellItemsRequest request = new SellItemsRequest();
-        request.setRequests(new ArrayList<>());
+        final SellItemsRequest request = new SellItemsRequest(new ArrayList<>());
         request.getRequests().add(saladRequest);
         request.getRequests().add(tomatoRequest);
 
@@ -57,8 +56,7 @@ public class OrderCreationUseCaseTest {
 
     @Test(expected = UnknownProductException.class)
     public void unknownProduct() {
-        SellItemsRequest request = new SellItemsRequest();
-        request.setRequests(new ArrayList<>());
+        SellItemsRequest request = new SellItemsRequest(new ArrayList<>());
         SellItemRequest unknownProductRequest = new SellItemRequest(1, "unknown product");
         request.getRequests().add(unknownProductRequest);
 
