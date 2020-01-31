@@ -17,7 +17,10 @@ public class TestOrderRepository implements OrderRepository {
 
     @Override
     public Order getById(int orderId) {
-        return orders.stream().filter(o -> o.getId() == orderId).findFirst().get();
+        return orders.stream()
+                .filter(o -> o.getId() == orderId)
+                .findFirst()
+                .orElse(null);
     }
 
     public void addOrder(Order order) {
