@@ -25,11 +25,12 @@ public class Order {
         this.items = orderItems;
     }
 
-    public BigDecimal getTotal() {
-        return items.stream()
-                .map(OrderItem::getTaxedAmount)
-                .reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO);
+    public int getId() {
+        return id;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
     }
 
     public String getCurrency() {
@@ -38,6 +39,13 @@ public class Order {
 
     public List<OrderItem> getItems() {
         return items;
+    }
+
+    public BigDecimal getTotal() {
+        return items.stream()
+                .map(OrderItem::getTaxedAmount)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
     }
 
     public BigDecimal getTax() {
@@ -73,13 +81,5 @@ public class Order {
         }
 
         status = SHIPPED;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public int getId() {
-        return id;
     }
 }

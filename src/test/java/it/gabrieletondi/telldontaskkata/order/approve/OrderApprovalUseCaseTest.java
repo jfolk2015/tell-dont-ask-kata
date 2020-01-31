@@ -30,7 +30,6 @@ public class OrderApprovalUseCaseTest {
     public void rejectedExistingOrder() {
         Order initialOrder = new Order(1, OrderStatus.CREATED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
         OrderApprovalRequest request = new OrderApprovalRequest(1, false);
 
         useCase.run(request);

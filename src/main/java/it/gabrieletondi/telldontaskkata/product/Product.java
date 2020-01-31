@@ -2,7 +2,6 @@ package it.gabrieletondi.telldontaskkata.product;
 
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_UP;
 
 public class Product {
@@ -10,10 +9,10 @@ public class Product {
     private final BigDecimal price;
     private final BigDecimal taxPercentage;
 
-    public Product(String name, BigDecimal price, BigDecimal taxPercentage) {
+    public Product(String name, BigDecimal price, BigDecimal taxRate) {
         this.name = name;
         this.price = price;
-        this.taxPercentage = taxPercentage;
+        this.taxPercentage = taxRate;
     }
 
     public String getName() {
@@ -25,7 +24,7 @@ public class Product {
     }
 
     public BigDecimal getUnitaryTax() {
-        return price.divide(valueOf(100)).multiply(taxPercentage).setScale(2, HALF_UP);
+        return price.multiply(taxPercentage).setScale(2, HALF_UP);
     }
 
     public BigDecimal getUnitaryTaxedAmount() {

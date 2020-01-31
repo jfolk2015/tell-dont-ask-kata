@@ -21,8 +21,8 @@ public class OrderCreationUseCaseTest {
     private final TestOrderRepository orderRepository = new TestOrderRepository();
     private final ProductCatalog productCatalog = new InMemoryProductCatalog(
             Arrays.asList(
-                    new Product("salad", new BigDecimal("3.56"), new BigDecimal("10")),
-                    new Product("tomato", new BigDecimal("4.65"), new BigDecimal("10"))
+                    new Product("salad", new BigDecimal("3.56"), new BigDecimal(".10")),
+                    new Product("tomato", new BigDecimal("4.65"), new BigDecimal(".10"))
             )
     );
     private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository, productCatalog);
