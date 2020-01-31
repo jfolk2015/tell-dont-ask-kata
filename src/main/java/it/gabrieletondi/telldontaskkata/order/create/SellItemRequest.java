@@ -1,8 +1,8 @@
 package it.gabrieletondi.telldontaskkata.order.create;
 
 public class SellItemRequest {
-    private int quantity;
-    private String productName;
+    private final int quantity;
+    private final String productName;
 
     public SellItemRequest(int quantity, String productName) {
         this.quantity = quantity;

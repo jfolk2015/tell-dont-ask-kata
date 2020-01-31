@@ -2,9 +2,9 @@ package it.gabrieletondi.telldontaskkata.order.create;
 
 import it.gabrieletondi.telldontaskkata.order.Order;
 import it.gabrieletondi.telldontaskkata.order.OrderItem;
+import it.gabrieletondi.telldontaskkata.order.OrderRepository;
 import it.gabrieletondi.telldontaskkata.order.OrderStatus;
 import it.gabrieletondi.telldontaskkata.product.Product;
-import it.gabrieletondi.telldontaskkata.order.OrderRepository;
 import it.gabrieletondi.telldontaskkata.product.ProductCatalog;
 
 import java.util.ArrayList;

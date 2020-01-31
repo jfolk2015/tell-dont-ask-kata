@@ -1,8 +1,5 @@
 package it.gabrieletondi.telldontaskkata.order;
 
-import it.gabrieletondi.telldontaskkata.order.Order;
-import it.gabrieletondi.telldontaskkata.order.OrderRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 

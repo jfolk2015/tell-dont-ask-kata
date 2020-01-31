@@ -2,14 +2,13 @@ package it.gabrieletondi.telldontaskkata.order.create;
 
 import it.gabrieletondi.telldontaskkata.order.Order;
 import it.gabrieletondi.telldontaskkata.order.OrderStatus;
-import it.gabrieletondi.telldontaskkata.product.Product;
-import it.gabrieletondi.telldontaskkata.product.InMemoryProductCatalog;
 import it.gabrieletondi.telldontaskkata.order.TestOrderRepository;
+import it.gabrieletondi.telldontaskkata.product.InMemoryProductCatalog;
+import it.gabrieletondi.telldontaskkata.product.Product;
 import it.gabrieletondi.telldontaskkata.product.ProductCatalog;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

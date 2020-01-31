@@ -1,8 +1,5 @@
 package it.gabrieletondi.telldontaskkata.product;
 
-import it.gabrieletondi.telldontaskkata.product.Product;
-import it.gabrieletondi.telldontaskkata.product.ProductCatalog;
-
 import java.util.List;
 
 public class InMemoryProductCatalog implements ProductCatalog {
