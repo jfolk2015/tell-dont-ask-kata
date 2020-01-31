@@ -18,10 +18,7 @@ public class OrderApprovalUseCaseTest {
     public void approvedExistingOrder() {
         Order initialOrder = new Order(1, OrderStatus.CREATED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(true);
+        OrderApprovalRequest request = new OrderApprovalRequest(1, true);
 
         useCase.run(request);
 
@@ -34,9 +31,7 @@ public class OrderApprovalUseCaseTest {
         Order initialOrder = new Order(1, OrderStatus.CREATED, "", emptyList());
         orderRepository.addOrder(initialOrder);
 
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(false);
+        OrderApprovalRequest request = new OrderApprovalRequest(1, false);
 
         useCase.run(request);
 
@@ -48,10 +43,7 @@ public class OrderApprovalUseCaseTest {
     public void cannotApproveRejectedOrder() {
         Order initialOrder = new Order(1, OrderStatus.REJECTED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(true);
+        OrderApprovalRequest request = new OrderApprovalRequest(1, true);
 
         useCase.run(request);
 
@@ -62,10 +54,7 @@ public class OrderApprovalUseCaseTest {
     public void cannotRejectApprovedOrder() {
         Order initialOrder = new Order(1, OrderStatus.APPROVED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(false);
+        OrderApprovalRequest request = new OrderApprovalRequest(1, false);
 
         useCase.run(request);
 
@@ -76,10 +65,7 @@ public class OrderApprovalUseCaseTest {
     public void shippedOrdersCannotBeApproved() {
         Order initialOrder = new Order(1, OrderStatus.SHIPPED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(true);
+        OrderApprovalRequest request = new OrderApprovalRequest(1, true);
 
         useCase.run(request);
 
@@ -90,10 +76,7 @@ public class OrderApprovalUseCaseTest {
     public void shippedOrdersCannotBeRejected() {
         Order initialOrder = new Order(1, OrderStatus.SHIPPED, "", emptyList());
         orderRepository.addOrder(initialOrder);
-
-        OrderApprovalRequest request = new OrderApprovalRequest();
-        request.setOrderId(1);
-        request.setApproved(false);
+        OrderApprovalRequest request = new OrderApprovalRequest(1, false);
 
         useCase.run(request);
 
